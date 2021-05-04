@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:haber/core/provider_data/state_data.dart';
+import 'package:haber/core/provider_data/theme_data.dart';
 
 import 'package:provider/provider.dart';
 
 class IntroPage extends StatelessWidget {
   final List<String> imgurl = ["intropage1", "intropage2", "intropage3"];
   final PageController pagecontroller = PageController();
-
+  final introwords = <String>["Dünyanın her yerinden haberler","Tüm kaynaklara anında erişim","Kendi blog arşivini oluştur"];
   @override
   Widget build(BuildContext context) {
     Function pageview = Provider.of<StateData>(context).intropage;
     int page = Provider.of<StateData>(context).intropageindex;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.grey[100],
         appBar: AppBar(
           toolbarHeight: 50,
-          title: Text(
-            "Haber app",
+          title: Container(
+            decoration: BoxDecoration(
+                border: Border(
+              bottom: BorderSide(
+                color: Colors.red,
+                width: 3.0,
+              ),
+            )),
+            child: Text(
+              "Haber app",
+            ),
           ),
         ),
         bottomNavigationBar: Container(
@@ -46,6 +57,10 @@ class IntroPage extends StatelessWidget {
               InkWell(
                 borderRadius: BorderRadius.circular(25),
                 onTap: () {
+                  Provider.of<MyThemeData>(
+                    context,
+                    listen: false,
+                  ).updateFirstOpen();
                   // ignore: unnecessary_statements
                   page == 2 ? Navigator.pushNamed(context, "tohome") : null;
                 },
@@ -53,14 +68,18 @@ class IntroPage extends StatelessWidget {
                   duration: Duration(milliseconds: 200),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
-                    color:page == 2 ? Colors.grey[500]: Colors.grey[300],
+                    color: page == 2 ? Colors.grey[500] : Colors.grey[300],
                   ),
                   padding: page == 2
-                      ? EdgeInsets.symmetric(horizontal: 85, vertical: 12)
+                      ? EdgeInsets.symmetric(horizontal: 75, vertical: 12)
                       : EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                   child: Text(
-                    "ATLA",
-                    style: TextStyle(fontSize: 17, letterSpacing: 2),
+                    "BAŞLA",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        letterSpacing: 3,
+                        color: page == 2 ? Colors.black87 : Colors.grey),
                   ),
                 ),
               ),
@@ -89,11 +108,18 @@ class IntroPage extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.cover,
                     ),
-                    Center(
-                      child: AnimatedOpacity(
-                        opacity: 1,
-                        duration: Duration(milliseconds: 150),
-                        child: Text("Deneme sayfası ${index + 1}"),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom:40.0,left:50),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Container(
+                          width: 150.0,
+                          child: Text(
+                            introwords[index],
+                            style: TextStyle(
+                                fontSize: 32, fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
                     ),
                   ],

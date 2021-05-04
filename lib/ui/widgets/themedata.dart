@@ -5,6 +5,7 @@ class AppTheme {
   static final ThemeData lightheme = ThemeData(
     fontFamily: "Play",
     brightness: Brightness.light,
+    accentColor: Colors.red,
     cardTheme: CardTheme(
       color: Colors.grey[50],
       elevation: 6.0,
@@ -14,11 +15,11 @@ class AppTheme {
       color: Colors.black,
       size: 25.0,
     ),
-    primaryColor: Colors.white,
-    scaffoldBackgroundColor: Colors.white,
+    primaryColor: Colors.grey[200],
+    secondaryHeaderColor: Colors.transparent,
     appBarTheme: AppBarTheme(
       elevation: 0,
-      color: Colors.white,
+      color: Colors.grey[100],
       textTheme: TextTheme(
         // ignore: deprecated_member_use
         title: TextStyle(
@@ -29,6 +30,7 @@ class AppTheme {
       ),
     ),
     tabBarTheme: TabBarTheme(
+      indicator: UnderlineTabIndicator(borderSide: BorderSide(color: Colors.red,width: 3.0),),
       labelPadding: EdgeInsets.only(
         right: 5.0,
         left: 10.0,
@@ -61,9 +63,11 @@ class AppTheme {
     ),
   );
 
+
   static final ThemeData darktheme = ThemeData(
     fontFamily: "Play",
     brightness: Brightness.dark,
+    accentColor: Colors.red,
     cardTheme: CardTheme(
       color: Colors.grey[900],
       elevation: 6.0,
@@ -74,6 +78,7 @@ class AppTheme {
       size: 25.0,
     ),
     primaryColor: Colors.grey,
+    secondaryHeaderColor: Colors.transparent,
     backgroundColor: Colors.black,
     scaffoldBackgroundColor: Colors.black,
     appBarTheme: AppBarTheme(
@@ -95,6 +100,7 @@ class AppTheme {
       ),
     ),
     tabBarTheme: TabBarTheme(
+      indicator: UnderlineTabIndicator(borderSide: BorderSide(color: Colors.red,width: 3.0),),
       labelPadding: EdgeInsets.only(
         right: 5.0,
         left: 10.0,

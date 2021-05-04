@@ -15,13 +15,16 @@ class ProfilePage extends StatelessWidget {
             SliverAppBar(
               actions: [
                 IconButton(
-                    onPressed: () {
-                      Provider.of<MyThemeData>(context,listen: false,).updateTheme();
-                    },
-                    icon: Provider.of<MyThemeData>(context).isdarkmodeon == false
-                        ? Icon(Icons.wb_sunny_rounded)
-                        : Icon(Icons.nights_stay_rounded),
-                  ),
+                  onPressed: () {
+                    Provider.of<MyThemeData>(
+                      context,
+                      listen: false,
+                    ).updateTheme();
+                  },
+                  icon: Provider.of<MyThemeData>(context).isdarkmodeon == false
+                      ? Icon(Icons.wb_sunny_rounded)
+                      : Icon(Icons.nights_stay_rounded),
+                ),
                 IconButton(
                   onPressed: () {
                     Navigator.pushNamed(context, "tosettings");
@@ -41,7 +44,7 @@ class ProfilePage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 30.0, left: 20),
                     child: Text(
-                      "Giriş yap",
+                      "PROFİLE",
                       style: TextStyle(
                         fontSize: 25,
                         letterSpacing: 1.0,
@@ -73,7 +76,15 @@ class ProfilePage extends StatelessWidget {
           children: [
             ProfileTabbir(),
             ProfileTabiki(),
-            CustomScrollView(),
+            CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Center(
+                    child: Text("Yapım Aşamasında"),
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),

@@ -26,8 +26,8 @@ class ExplorePage extends StatelessWidget {
                       "KEŞFET",
                       style: TextStyle(
                         fontSize: 25,
-                        letterSpacing: 2.0,
-                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1.0,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),

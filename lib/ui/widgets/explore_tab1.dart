@@ -1,57 +1,113 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:haber/core/models/sourcemodel.dart';
+import 'package:haber/core/service/get_source.dart';
 import 'package:haber/ui/widgets/minicard.dart';
 
-class ExplorePageTabbir extends StatelessWidget {
+class ExplorePageTabbir extends StatefulWidget {
+  @override
+  _ExplorePageTabbirState createState() => _ExplorePageTabbirState();
+}
+
+class _ExplorePageTabbirState extends State<ExplorePageTabbir>
+    with AutomaticKeepAliveClientMixin {
+  final List apilist = [
+    "https://a578e23ee7c7.ngrok.io/HABER-API/api/haber/get_from_source.php?page=1&rowperpage=10&source=CNN%20T%C3%BCrk",
+    "https://a578e23ee7c7.ngrok.io/HABER-API/api/haber/get_from_source.php?page=1&rowperpage=10&source=Haber%20T%C3%BCrk",
+    "https://a578e23ee7c7.ngrok.io/HABER-API/api/haber/get_from_source.php?page=1&rowperpage=10&source=Onedio",
+    "https://a578e23ee7c7.ngrok.io/HABER-API/api/haber/get_from_source.php?page=1&rowperpage=10&source=Anaddolu%20Ajans",
+    "https://a578e23ee7c7.ngrok.io/HABER-API/api/haber/get_from_source.php?page=1&rowperpage=10&source=DW%20T%C3%BCrk%C3%A7e"
+  ];
+  final source = Source();
+  static List<SourceModel> sources = [];
+  bool isloading;
+  PageController _controller =
+      PageController(keepPage: true, viewportFraction: 0.56);
+
+  @override
+  void initState() {
+    super.initState();
+    isloading = true;
+    loadsource();
+  }
+
+  void loadsource() async {
+    isloading = true;
+    await source.getSource().then((List<SourceModel> data) {
+      if (data.isEmpty) {
+        setState(() {
+          isloading = false;
+        });
+      } else {
+        setState(() {
+          sources.addAll(data);
+          isloading = false;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
-            child: Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: ImageSlider(),
+    return SingleChildScrollView(
+          child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.28,
+              width: MediaQuery.of(context).size.width,
+              child: ImageSlider(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0, left: 12.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Önerilerimiz",
+                style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "roboto"),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.0),
+            child: isloading == true
+                ? Container(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : Container(
+                  height: MediaQuery.of(context).size.height * 0.47,
+                  child: PageView.builder(
+                      controller: _controller,
+                      pageSnapping: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: sources.length,
+                      itemBuilder: (BuildContext context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right:10.0),
+                          child: MiniCard(
+                            imgUrl: sources[index].imgUrl,
+                            api: apilist[index],
+                            title: sources[index].title,
+                          ),
+                        );
+                      },
+                    ),
                 ),
-              ],
-            ),
           ),
-        ),
-        SliverPadding(
-          padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
-          sliver: SliverGrid(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return MiniCard(
-                  imgUrl:
-                      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJx71mMaws1TKTQNVTE6eid7eT2srVe1TZ5FHA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1",
-                  source: "CNN TÜRK",
-                  newsUrl:
-                      "https://i2.cnnturk.com/i/cnnturk/75/720x490/5fef75b117aca9197c453a5e",
-                  title: "Kaydedilen haber Kaydedilen haber Kaydedilen haber 1",
-                );
-              },
-              childCount: 8,
-            ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 0.61,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 5.0,
-              crossAxisCount: 2,
-            ),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class ImageSlider extends StatefulWidget {
@@ -64,7 +120,7 @@ class _ImageSliderState extends State<ImageSlider>
   AnimationController _animationController;
   // ignore: unused_field
   Animation<double> _nextPage;
-  int _currentPage = 1;
+  int _currentPage = 0;
   PageController _pageController = PageController(initialPage: 0);
 
   @override
@@ -81,7 +137,7 @@ class _ImageSliderState extends State<ImageSlider>
         if (_animationController.status == AnimationStatus.completed) {
           _animationController.reset(); //Reset the controller
           final int page = 3; //Number of pages in your PageView
-          if (_currentPage < page) {
+          if (_currentPage <= page) {
             _currentPage++;
             _pageController.animateToPage(_currentPage,
                 duration: Duration(milliseconds: 300),
@@ -104,7 +160,6 @@ class _ImageSliderState extends State<ImageSlider>
   Widget build(BuildContext context) {
     _animationController.forward();
     return PageView.builder(
-      itemCount: 3,
       onPageChanged: (value) {
         _animationController.forward();
       },

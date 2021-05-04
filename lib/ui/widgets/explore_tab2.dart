@@ -8,7 +8,7 @@ class ExplorePageTabiki extends StatefulWidget {
   _ExplorePageTabikiState createState() => _ExplorePageTabikiState();
 }
 
-class _ExplorePageTabikiState extends State<ExplorePageTabiki> {
+class _ExplorePageTabikiState extends State<ExplorePageTabiki> with AutomaticKeepAliveClientMixin{
   List<CategoryModel> categoriliste = <CategoryModel>[];
 
   @override
@@ -19,7 +19,7 @@ class _ExplorePageTabikiState extends State<ExplorePageTabiki> {
 
   @override
   Widget build(BuildContext context) {
-
+    
     return CustomScrollView(
       slivers: [
         SliverPadding(
@@ -35,9 +35,9 @@ class _ExplorePageTabikiState extends State<ExplorePageTabiki> {
               childCount: categoriliste.length,
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 1.4,
+              childAspectRatio: 1.40,
               crossAxisSpacing: 10.0,
-              mainAxisSpacing: 5.0,
+              mainAxisSpacing: 10.0,
               crossAxisCount: 2,
             ),
           ),
@@ -45,4 +45,7 @@ class _ExplorePageTabikiState extends State<ExplorePageTabiki> {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

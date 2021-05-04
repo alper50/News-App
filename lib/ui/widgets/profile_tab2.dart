@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haber/ui/widgets/minicard.dart';
+import 'package:haber/ui/widgets/news_template.dart';
 
 class ProfileTabiki extends StatelessWidget {
   @override
@@ -11,22 +11,22 @@ class ProfileTabiki extends StatelessWidget {
           sliver: SliverGrid(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return MiniCard(
-                  imgUrl:
-                      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJx71mMaws1TKTQNVTE6eid7eT2srVe1TZ5FHA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1",
-                  source: "CNN TÜRK",
-                  newsUrl:
-                      "https://i2.cnnturk.com/i/cnnturk/75/720x490/5fef75b117aca9197c453a5e",
-                  title: "Kaydedilen haber Kaydedilen haber Kaydedilen haber 1",
+                return NewsWidget(
+                  title: "Kaydedilen haber",
+                  source: "Kaynak",
+                  newsUrl: "https:\/\/external-content.duckduckgo.com\/iu\/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Lqnt4Gll0-cyaLNuM8luZgHaEK%26pid%3DApi&f=1",
+                  imgUrl: "https:\/\/external-content.duckduckgo.com\/iu\/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Lqnt4Gll0-cyaLNuM8luZgHaEK%26pid%3DApi&f=1",
+                  pubdate: "1 gün önce",
+
                 );
               },
               childCount: 10,
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 0.61,
+              childAspectRatio: 1.1,
               crossAxisSpacing: 10.0,
               mainAxisSpacing: 5.0,
-              crossAxisCount: 2,
+              crossAxisCount: 1,
             ),
           ),
         ),

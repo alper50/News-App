@@ -7,38 +7,48 @@ class Category extends StatelessWidget {
   const Category({Key key, this.img, this.categoryName}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          "tonews",
+          arguments: {
+            "api":
+                "https://a578e23ee7c7.ngrok.io/haber-api/api/haber/get_from_category.php?page=1&rowperpage=10&category=$categoryName",
+            "title": categoryName,
+          },
+        );
+      },
       child: Stack(
+        fit: StackFit.expand,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(7),
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: "images/$img.jpg",
-              placeholder: (context, url) => Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                      child: SizedBox(
-                        child: CircularProgressIndicator(),
-                        height: 25,
-                        width: 25,
-                      ),
-                      alignment: Alignment.bottomRight),
-                ),
-                color: Colors.red,
+          CachedNetworkImage(
+            fit: BoxFit.cover,
+            imageUrl: img,
+            placeholder: (context, url) => Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                    child: SizedBox(
+                      child: CircularProgressIndicator(),
+                      height: 25,
+                      width: 25,
+                    ),
+                    alignment: Alignment.bottomRight),
               ),
-              placeholderFadeInDuration: Duration(milliseconds: 500),
+              color: Colors.red,
             ),
+            placeholderFadeInDuration: Duration(milliseconds: 500),
           ),
           Container(
             margin: EdgeInsets.only(left: 5.0, top: 5.0),
             child: Text(
-              categoryName,
+              categoryName.toUpperCase(),
               style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+                fontSize: 20.0,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

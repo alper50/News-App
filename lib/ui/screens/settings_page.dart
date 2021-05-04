@@ -23,7 +23,7 @@ class SettingsPage extends StatelessWidget {
                   elevation: 8.0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)),
-                  color: Colors.blue,
+                  color: Colors.red,
                   child: ListTile(
                     onTap: () {
                       //open edit profile
@@ -52,7 +52,7 @@ class SettingsPage extends StatelessWidget {
                       ListTile(
                         leading: Icon(
                           Icons.language,
-                          color: Colors.blue,
+                          color: Colors.red,
                         ),
                         title: Text("Dili Değiştir"),
                         trailing: Icon(Icons.keyboard_arrow_right),
@@ -63,7 +63,7 @@ class SettingsPage extends StatelessWidget {
                       ListTile(
                         leading: Icon(
                           Icons.location_on,
-                          color: Colors.blue,
+                          color: Colors.red,
                         ),
                         title: Text("Konumu Değiştir"),
                         trailing: Icon(Icons.keyboard_arrow_right),
@@ -74,7 +74,7 @@ class SettingsPage extends StatelessWidget {
                       ListTile(
                         leading: Icon(
                           Icons.notifications,
-                          color: Colors.blue,
+                          color: Colors.red,
                         ),
                         title: Text("Bildirim Ayarları"),
                         trailing: Icon(Icons.keyboard_arrow_right),
@@ -104,7 +104,7 @@ class SettingsPage extends StatelessWidget {
               height: 80,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.red,
                 shape: BoxShape.circle,
               ),
             ),

@@ -11,7 +11,7 @@ class ProfileTabbir extends StatelessWidget {
           delegate: SliverChildBuilderDelegate(
             (context, index) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 2.0),
-              child: MyListTile(istrailing: 0,),
+              child: MyListTile(istrailing: 0,title: "Bildirim: $index",),
             ),
             childCount: 15,
           ),
