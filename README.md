@@ -1,6 +1,9 @@
 # News-App
 
-A new Flutter project.
+A news app with integrated rest-api for getting latest news made by flutter
+- Lazy Loading
+- Integrated Rest Api
+- Night Mode
 
 ## Getting Started
 
