@@ -5,7 +5,7 @@ A news app with integrated rest-api for getting latest news made by flutter
 - Integrated Rest Api
 - Night Mode
 
-<video><source src="https://github.com/alper50/News-App/blob/master/assets/fonts/newsvideo.mp4" type="video/mp4">  </video>
+[![ Demo ](https://share.gifyoutube.com/KzB6Gb.gif)](https://www.youtube.com/watch?v=o6uVbTZzSJE)
 
 ## Getting Started
 
